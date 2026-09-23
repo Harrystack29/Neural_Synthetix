@@ -421,25 +421,6 @@ langToggle?.addEventListener('click', () => {
   applyLanguage(next);
 });
 
-/* =========================================================
-   SETTINGS MENU & THEME SWITCHER
-   ========================================================= */
-const settingsBtn = document.getElementById("settings-btn");
-const settingsMenu = document.getElementById("settings-menu");
-
-settingsBtn?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  const isExpanded = settingsBtn.getAttribute("aria-expanded") === "true";
-  settingsBtn.setAttribute("aria-expanded", !isExpanded);
-  settingsMenu?.classList.toggle("open");
-});
-
-document.addEventListener("click", (e) => {
-  if (settingsMenu?.classList.contains("open") && !settingsBtn.contains(e.target) && !settingsMenu.contains(e.target)) {
-    settingsMenu.classList.remove("open");
-    settingsBtn.setAttribute("aria-expanded", "false");
-  }
-});
 
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const currentTheme = localStorage.getItem('ns-theme') || 'dark';
@@ -472,7 +453,7 @@ function updateUsecase(key, animate = true) {
     setText(detailContent.querySelector('.eyebrow'), data[0]);
     setText(detailContent.querySelector('h3'), data[1]);
     setText(detailContent.querySelector('p'), data[2]);
-    setText(detailContent.querySelector('a'), translations[lang].usecases.detailCta);
+    setText(detailContent.querySelector('a'), translations[lang].usecases.detailCta, true);
     miniWindow.querySelector('.mini-head').innerHTML = `${data[3]} <span>${data[4]}</span>`;
     miniWindow.querySelectorAll('.mini-row').forEach((row, idx) => {
       setText(row.querySelector('span'), data[5][idx][0]);
